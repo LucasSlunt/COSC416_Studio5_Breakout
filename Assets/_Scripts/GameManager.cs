@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -34,14 +35,38 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // add camera shake here
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
-        if(currentBrickCount == 0) SceneHandler.Instance.LoadNextScene();
+        if (currentBrickCount == 0) SceneHandler.Instance.LoadNextScene();
     }
 
     public void KillBall()
     {
         maxLives--;
         // update lives on HUD here
+        UIManager.Instance.UpdateLives(maxLives);
+
         // game over UI if maxLives < 0, then exit to main menu after delay
+        if (maxLives <= 0)
+        {
+            StartCoroutine(GameOver());
+            return;
+        }
+
         ball.ResetBall();
+    }
+
+    private IEnumerator GameOver()
+    {
+        //freeze the game so the player cannot do anything
+        Time.timeScale = 0;
+
+        //Show the game over screen
+        UIManager.Instance.ShowGameOverScreen();
+
+        //wait 1.5 seconds
+        yield return new WaitForSeconds(1.5f);
+
+        Time.timeScale = 1;
+
+        SceneHandler.Instance.LoadMenuScene();
     }
 }

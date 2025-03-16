@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : SingletonMonoBehavior<UIManager>
 {
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private GameObject gameOverPanel;
