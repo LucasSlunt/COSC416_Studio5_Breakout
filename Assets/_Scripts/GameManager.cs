@@ -67,6 +67,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
         Time.timeScale = 1;
 
+        Debug.Log("Loading Menu Scene...");
         SceneHandler.Instance.LoadMenuScene();
+        Debug.Log("Main Menu scene loaded.");
     }
 }
