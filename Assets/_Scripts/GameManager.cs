@@ -26,6 +26,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private void FireBall()
     {
         ball.FireBall();
+        
     }
 
     public void OnBrickDestroyed(Vector3 position)
@@ -36,6 +37,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         if (currentBrickCount == 0) SceneHandler.Instance.LoadNextScene();
+        AudioManager.Instance.PlaySFX("destroyBlock");
     }
 
     public void KillBall()
@@ -43,7 +45,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         maxLives--;
         // update lives on HUD here
         UIManager.Instance.UpdateLives(maxLives);
-
+        AudioManager.Instance.PlaySFX("loseLife");
         // game over UI if maxLives < 0, then exit to main menu after delay
         if (maxLives <= 0)
         {
