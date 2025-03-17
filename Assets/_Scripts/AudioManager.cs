@@ -22,9 +22,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu") 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        //PlaySFX("loadScene");
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             PlayMusic("menuMusic");
         }
@@ -36,8 +42,13 @@ public class AudioManager : MonoBehaviour
         {
             PlayMusic("gameMusic");
         }
-
     }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public void PlayMusic(string name)
     {
         Sound s = Array.Find(musicSounds, x => x.name == name);
