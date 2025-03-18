@@ -7,6 +7,9 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField] private Ball ball;
     [SerializeField] private Transform bricksContainer;
 
+    [SerializeField] private float screenShakeStrength;
+    [SerializeField] private float screenShakeDuration;
+
     private int currentBrickCount;
     private int totalBrickCount;
 
@@ -36,6 +39,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         AudioManager.Instance.PlaySFX("destroyBlock");
         // implement particle effect here
         // add camera shake here
+        ScreenShake.Shake(screenShakeStrength, screenShakeDuration);
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         if (currentBrickCount == 0)
