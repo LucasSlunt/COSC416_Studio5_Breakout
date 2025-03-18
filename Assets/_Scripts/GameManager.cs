@@ -66,6 +66,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     private IEnumerator GameOver()
     {
+        Debug.Log("Game Over method in GameManager.cs called");
         AudioManager.Instance.PlaySFX("gameOver");
 
         //freeze the game so the player cannot do anything
@@ -75,13 +76,21 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         AudioManager.Instance.PlayMusic("gameOverMusic");
         UIManager.Instance.ShowGameOverScreen();
 
-        //wait 1.5 seconds
-        yield return new WaitForSeconds(1.5f);
+        //start flashing text
+        yield return UIManager.Instance.StartCoroutine(UIManager.Instance.FlashText());
 
         Time.timeScale = 1;
 
-        Debug.Log("Loading Menu Scene...");
-        SceneHandler.Instance.LoadMenuScene();
-        Debug.Log("Main Menu scene loaded.");
+        Debug.Log("Atempting to load Main Menu Scene...");
+        if (SceneHandler.Instance != null)
+        {
+            Debug.Log("SceneHandler is NOT null. Calling LoadMenuScene()...");
+            SceneHandler.Instance.LoadMenuScene();
+            Debug.Log("Scene transition should be happening now...");
+        }
+        else
+        {
+            Debug.LogError("SceneHandler.Instance is NULL! The Main Menu cannot be loaded.");
+        }
     }
 }
