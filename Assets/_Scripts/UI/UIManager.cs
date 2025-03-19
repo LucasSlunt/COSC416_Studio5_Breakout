@@ -4,9 +4,15 @@ using System.Collections;
 
 public class UIManager : SingletonMonoBehavior<UIManager>
 {
+    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverText;
+
+    public void UpdateScore(int score)
+    {
+        scoreText.text = "Score: " + score; // Update the text with the current score
+    }
 
     public void UpdateLives(int lives)
     {

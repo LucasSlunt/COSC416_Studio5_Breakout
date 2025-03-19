@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -10,12 +12,17 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private int currentBrickCount;
     private int totalBrickCount;
 
+    private int score;
+
     private void OnEnable()
     {
+
+
         InputHandler.Instance.OnFire.AddListener(FireBall);
         ball.ResetBall();
         totalBrickCount = bricksContainer.childCount;
         currentBrickCount = bricksContainer.childCount;
+        score = 0;
     }
 
     private void OnDisable()
@@ -24,16 +31,27 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     }
 
     private void FireBall()
+
     {
+       
+
         AudioManager.Instance.PlaySFX("hitPaddle");
         ball.FireBall();
-        
+
+     
+
     }
 
     public void OnBrickDestroyed(Vector3 position)
     {
         // fire audio here
         AudioManager.Instance.PlaySFX("destroyBlock");
+
+        // Increase the score
+        score++;
+        // Update the score in UI
+        UIManager.Instance.UpdateScore(score);
+
         // implement particle effect here
         // add camera shake here
         currentBrickCount--;
@@ -43,6 +61,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             AudioManager.Instance.PlaySFX("gameWin");
             SceneHandler.Instance.LoadNextScene();
         }
+
         
     }
 
@@ -93,4 +112,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             Debug.LogError("SceneHandler.Instance is NULL! The Main Menu cannot be loaded.");
         }
     }
+
+
 }
