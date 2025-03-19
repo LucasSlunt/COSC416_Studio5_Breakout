@@ -2180,6 +2180,7 @@ GameObject:
   - component: {fileID: 1355270213}
   - component: {fileID: 1355270212}
   - component: {fileID: 1355270211}
+  - component: {fileID: 1355270215}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2305,6 +2306,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 63.454, y: 0, z: 0}
+--- !u!114 &1355270215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355270210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4a133be4de3ce4c8ba2ff594ba283b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1393726363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2685,6 +2698,7 @@ GameObject:
   - component: {fileID: 1576275138}
   - component: {fileID: 1576275136}
   - component: {fileID: 1576275139}
+  - component: {fileID: 1576275140}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2740,6 +2754,23 @@ MonoBehaviour:
   maxLives: 3
   ball: {fileID: 4561635119993004754}
   bricksContainer: {fileID: 796630123}
+--- !u!114 &1576275140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576275135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1a50240266ce041a59413948758e05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strengthBase: 0.5
+  strengthMultiplier: 0.5
+  durationBase: 0.5
+  durationMultiplier: 0.5
+  maxTimeBetweenBreaks: 1.5
 --- !u!1 &1627605434
 GameObject:
   m_ObjectHideFlags: 0

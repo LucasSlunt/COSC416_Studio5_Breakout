@@ -36,6 +36,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         AudioManager.Instance.PlaySFX("destroyBlock");
         // implement particle effect here
         // add camera shake here
+        ShakeManager.addShake();
         currentBrickCount--;
         Debug.Log($"Destroyed Brick at {position}, {currentBrickCount}/{totalBrickCount} remaining");
         if (currentBrickCount == 0)
@@ -53,7 +54,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         maxLives--;
         // update lives on HUD here
         UIManager.Instance.UpdateLives(maxLives);
-        
+        ShakeManager.addShake();
         // game over UI if maxLives < 0, then exit to main menu after delay
         if (maxLives <= 0)
         {
